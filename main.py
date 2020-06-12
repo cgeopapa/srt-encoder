@@ -6,6 +6,7 @@ from os.path import splitext
 from io import open
 from os.path import join
 from msvcrt import getch
+from sub_to_srt import sub_to_srt
 
 
 def convert(path):
@@ -29,5 +30,9 @@ for x in dirs:
         if splitext(file)[1] == '.srt':
             print('Converting: ' + file)
             convert(join(x[0], file))
+        elif splitext(file)[1] == '.sub':
+            print('Converting to srt: ' + file)
+            srt = join(x[0], splitext(file)[0]) + '.srt'
+            sub_to_srt(join(x[0], file), srt, 23.976)
 print('Press any key to exit...')
 getch()
